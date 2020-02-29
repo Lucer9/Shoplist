@@ -1,0 +1,36 @@
+<div id="header">
+    <h1>Shoplist</h1>
+    <p>These are our producs</p>
+    <a class="button" href="/product">+ Product</a>
+</div>
+<div class="table-container">
+    <table>
+        <tr>
+            <th style="width: 20%;">Name</th>
+            <th style="width: 20%;">Price</th style="width: 20%;">
+            <th style="width: 60%;">Description</th>
+        </tr>
+        {{#each products}}
+        <tr class="hover" data-href="/product/{{id}}">
+            <td>{{name}}</td>
+            <td>${{price}}</td>
+            <td>{{description}}</td>
+        </tr>
+        {{/each}}
+    </table>
+</div>
+<div class="pagination">
+    {{#each count}}
+    <a class="n{{n}}" href="/page={{n}}">{{n}}</a>
+    {{/each}}
+</div>
+
+<script>
+    $('*[data-href]').on("click", function () {
+        window.location = $(this).data('href');
+        return false;
+    });
+    $("td > a").on("click", function (e) {
+        e.stopPropagation();
+    });
+</script>

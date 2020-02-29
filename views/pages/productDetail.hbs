@@ -1,0 +1,64 @@
+<div class="container">
+    <a class="back" href="http://localhost:3000/">Back</a>
+
+    <div id="header">
+        <h1>Create Product</h1>
+        <p>Please complete the data</p>
+    </div>
+    <div class="padding">
+        {{#if product}}
+        <form action="http://localhost:3000/productUpdate/{{product.id}}" method="POST">
+            <div class="entry">
+                <p>Nombre:</p>
+                <input name="name" required value="{{product.name}}"></input>
+            </div>
+
+            <div class="entry">
+                <p>Price:</p>
+                <input type="number" name="price" required value="{{product.price}}"></input>
+            </div>
+
+            <div class="entry last">
+                <p>Descripcion:</p>
+                <textarea name="description">{{product.description}}</textarea>
+            </div>
+
+            <div class="col"><input type="submit" class="buttonSave" value="Save"></div>
+            <div class="col"><a onclick="sendDelete({{product.id}})" class="buttonDelete">Delete</a></div>
+        </form>
+        {{else}}
+        <form action="http://localhost:3000/product/" method="POST">
+            <div class="entry">
+                <p>Nombre:</p>
+                <input name="name" value="">
+            </div>
+
+            <div class="entry">
+                <p>Price:</p>
+                <input name="price" value="" type="number">
+            </div>
+
+            <div class="entry">
+                <p>Descripcion:</p>
+                <textarea name="description"></textarea>
+            </div>
+
+            <div class="col-1"><input type="submit" class="buttonSave" value="Save"></div>
+        </form>
+        {{/if}}
+
+
+
+    </div>
+</div>
+
+<script>
+    function sendDelete(id) {
+        console.log(id)
+        var xhttp = new XMLHttpRequest();
+        event.preventDefault();
+        xhttp.open("POST", 'http://localhost:3000/productDelete/'+ id, true);
+        xhttp.send();
+        window.location.replace('http://localhost:3000/');
+    }
+</script>
